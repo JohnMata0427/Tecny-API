@@ -1,8 +1,18 @@
-const app = require('./app');
+const app = require("./app");
+const mongoose = require("mongoose");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 9000;
 app.listen(port, () => {
-  /* eslint-disable no-console */
-  console.log(`Listening: http://localhost:${port}`);
-  /* eslint-enable no-console */
+    /* eslint-disable no-console */
+    console.log(`Puerto escuchado en: http://localhost:${port}`);
+    /* eslint-enable no-console */
 });
+
+mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log("Conectado a la base de datos");
+    })
+    .catch((error) => {
+        console.error("Error de conexión:", error);
+    });
